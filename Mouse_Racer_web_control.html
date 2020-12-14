@@ -1,0 +1,326 @@
+<html>
+<head>
+	<style>
+	/* http://meyerweb.com/eric/tools/css/reset/ 
+	   v2.0 | 20110126
+	   License: none (public domain)
+	*/
+
+	html, body, div, span, applet, object, iframe,
+	h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+	a, abbr, acronym, address, big, cite, code,
+	del, dfn, em, img, ins, kbd, q, s, samp,
+	small, strike, strong, sub, sup, tt, var,
+	b, u, i, center,
+	dl, dt, dd, ol, ul, li,
+	fieldset, form, label, legend,
+	table, caption, tbody, tfoot, thead, tr, th, td,
+	article, aside, canvas, details, embed, 
+	figure, figcaption, footer, header, hgroup, 
+	menu, nav, output, ruby, section, summary,
+	time, mark, audio, video {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		font-size: 100%;
+		font: inherit;
+		vertical-align: baseline;
+	}
+	/* HTML5 display-role reset for older browsers */
+	article, aside, details, figcaption, figure, 
+	footer, header, hgroup, menu, nav, section {
+		display: block;
+	}
+	body {
+		line-height: 1;
+	}
+	ol, ul {
+		list-style: none;
+	}
+	blockquote, q {
+		quotes: none;
+	}
+	blockquote:before, blockquote:after,
+	q:before, q:after {
+		content: '';
+		content: none;
+	}
+	table {
+		border-collapse: collapse;
+		border-spacing: 0;
+	}
+
+
+/*----------------------https://www.w3schools.com/howto/howto_js_rangeslider.asp---------------------*/
+
+
+.slidecontainer {
+  width: 250px; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 5px; /* Specified height */
+  margin:12px 0px;
+  margin-top:10px;
+  background: #444; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.85; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 60px;
+  height: 40px;
+  margin:0px 0px;
+  background: url('slider.png');
+  background-repeat: no-repeat;
+  background-size: 60px 40px;
+  border: 0;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 60px;
+  height: 40px;
+  margin:0px 0px;
+  background: url('slider.png');
+  background-repeat: no-repeat;
+  background-size: 60px 40px;
+  border: 0;
+  cursor: pointer;
+}
+
+/*------------------------------------------------------------*/
+	body {display: flex; flex-direction:column; justify-content:space-between; height:100%;}
+
+	#header, #content, #footer {text-align:center;}
+
+	#header, #footer {width:100%;  text-align:center; padding:10px 0px; background:#CCC;}
+	#header {height:24px;}
+	#footer {height:20px;}
+	#header h1 {font-size:24px;}
+
+	#modeselect { background:#CCC; padding:16px; margin-bottom:16px;}
+	#setConnectMode, #setPlayMode {display:inline-box;padding:5px; margin:5px; border-radius:5px; background: #FFF; border: 3px solid white}
+	#setConnectMode {border: 3px solid black}
+
+	#content {max-width:1200px; max-height:600px;  padding-bottom:8px ; margin:0px auto; text-align:center; border:1px solid #999; border-radius:5px;  vertical-align:middle; }
+
+	#connectsection {display:block; }
+	#connectsection li {max-width:300px; margin: 20px auto; padding: 5px 10px;}
+	#playsection {display:none;}
+
+	.slidecontainer {margin:0px 10px; width:250px; display: inline-block;height:25px;}
+   
+    #playsection li	{display:flex; flex-wrap:wrap; align-items:center;justify-content: center;margin:10px 10px;}
+    #playsection .colorsection label {width:50px; text-align:right; margin-right:10px;}
+    #playsection input[type=number] {width:50px;}
+
+	#controlGrid {display:block; height:120px; width:120px; background:#CCC; border:1px solid black; margin:10px auto; padding 0px;}
+	#controlGrid div.row {display:block; width:120px; height:40px; margin:0px; padding 0px;}
+	#controlGrid div.row div.box {display:block; float:left; width:40px; height: 40px; margin:0px; padding 0px; line-height: 40px;}
+
+    input[type=button] { margin:5px 5px; padding:6px 8px; font-weight:bold; background-color:#EEE; border-radius: 5px;}
+    input[type=button]:hover {background-color:#FFF;}
+
+	</style>
+
+</head>
+
+<body>
+    
+    <div id="header"><h1>Mouse Racer Controller</h1></div>
+
+	<div id="content">
+			
+		<div id="modeselect"><span id="setConnectMode">Connect 🔌</span><span id="setPlayMode">Play</span></div>
+
+		<div id="connectsection" >
+		    <ul>
+				<li><img src="mouse.jpg"></li>
+		        <li><input class="button" type="button" id="connectButton" value="Connect / Pair" /><input class="button" type="button" id="disconnectButton" value="Disconnect" /></li>
+		        <li><p>Please note:  this page requires <a href="https://caniuse.com/web-bluetooth">Web Bluetooth</a> support to work, so you will need to use Google Chrome, Microsoft Edge or Opera.</p></li>
+				<li><p><i>Note: If it doesn't connect first time, please try again.</i></p></li>
+				<li><img src="bluetoothsmart.png" width="140px"></li>
+		    </ul>
+		</div>    
+		    
+		<div id="playsection" >
+		<ul>
+
+		    <li id="speedsection" class="colorsection">
+		        <label>Speed: </label><input id="speed" type="number" min="0" max="32" value="12"/><div class="slidecontainer"><input type="range" min="0" max="32" value="12" class="slider" id="speedslider"></div>
+		    </li>
+		    
+		   
+		   
+		   <li>
+   		       <div id="controlGrid">
+					<div class="row top">
+						<div class="box" onclick="setMove()" ></div>
+						<div class="box" onclick="setMove(1)" >🔼</div>
+						<div class="box" onclick="setMove()" ></div>
+					</div>                                   
+					<div class="row middle">                 
+						<div class="box" onclick="setMove(4)" >◀</div>
+						<div class="box" onclick="setMove()" ></div>
+						<div class="box" onclick="setMove(8)" >▶</div>
+					</div>                                   
+					<div class="row bottom">                 
+						<div class="box" onclick="setMove()" ></div>
+						<div class="box" onclick="setMove(2)" >🔽</div>
+						<div class="box" onclick="setMove()" ></div>
+					</div>
+				</div>
+		   </li>
+		   <li><p><i>Arrow keys also work :-)</i></p></li>
+		</ul>
+		</div>
+	  		
+	</div>
+    
+	<div id="bottom" >
+		<div style="padding:5px;">
+			<hr/>
+			<p>v 1.0, 15/12/20, Last Command:  <span id="deviceHeartbeat"></span></p>
+		</div>
+		<div id="footer">
+			<div><a href="https://samuelpinches.com.au">Samuel Pinches</a>, Dec 2020 </div>
+		</div>
+	</div>
+
+
+<script>
+
+const connectsection = document.getElementById('connectsection');
+const connectButton = document.getElementById('connectButton');
+const disconnectButton = document.getElementById('disconnectButton');
+const playsection = document.getElementById('playsection');
+const speed = document.getElementById('speed');
+const speedslider = document.getElementById('speedslider');
+
+const allbuttons = document.querySelectorAll('input[type=button]');
+allbuttons.forEach(allbuttons => allbuttons.disabled = true);
+connectButton.disabled = false;
+
+const zeroPad = (num, places) => String(num).padStart(places, '0')
+
+const primaryServiceUuid = 0xae00;
+const sendCharUuid = 0xae01;
+const receiveCharUuid = 0xae02;
+
+const deviceHeartbeat = document.getElementById('deviceHeartbeat');
+
+const setConnectMode = document.getElementById('setConnectMode');
+const setPlayMode = document.getElementById('setPlayMode');
+
+/* ----- BT Communication Functions -------*/
+
+let device, sendCharacteristic, receiveCharacteristic;
+connectButton.onclick = async () => {
+  device = await navigator.bluetooth.requestDevice({ filters: [{ name : ["pets"] }], optionalServices: [ primaryServiceUuid ] }); // 
+  const server = await device.gatt.connect();
+  const service = await server.getPrimaryService(primaryServiceUuid);
+  receiveCharacteristic = await service.getCharacteristic(receiveCharUuid);
+  sendCharacteristic = await service.getCharacteristic(sendCharUuid);
+  device.ongattserverdisconnected = disconnect;
+  //listen();
+
+  setConnectMode.style.background = 'green';
+  setConnectMode.style.color = 'white';
+  setConnectMode.innerText = "Connected 🔌";
+  allbuttons.forEach(allbuttons => allbuttons.disabled = false);
+
+  connectButton.style.display = 'none';
+  disconnectButton.style.display = 'initial';
+};
+
+disconnectButton.onclick = async () => {
+  await device.gatt.disconnect();
+  disconnect();
+};
+
+const disconnect = () => {
+  device = null;
+  receiveCharacteristic = null;
+  sendCharacteristic = null;
+  
+  connectButton.style.display = 'initial';
+  disconnectButton.style.display = 'none';
+};
+
+/* ----- UI Functions -------*/
+speedslider.onchange = async function(){ speed.value = speedslider.value; }
+
+resetMode = function(){
+    connectsection.style.display = 'none';
+    playsection.style.display = 'none';
+    setConnectMode.style.border = "3px solid white";
+    setPlayMode.style.border = "3px solid white";
+}
+
+setConnectMode.onclick = function(){
+    resetMode();
+    connectsection.style.display = 'block';
+    setConnectMode.style.border = "3px solid black";
+ }; 
+ 
+setPlayMode.onclick = function(){
+    resetMode();
+    playsection.style.display = 'block';
+    setPlayMode.style.border = "3px solid black";
+	  unlock();
+ }; 
+
+  document.addEventListener('keydown', function (event) {
+	if (event.key === 'ArrowUp') {setMove(1);}
+	if (event.key === 'ArrowDown') {setMove(2);}
+	if (event.key === 'ArrowLeft') {setMove(4);}
+	if (event.key === 'ArrowRight') {setMove(8);}
+  });
+  
+function concatArray(item, index) {deviceHeartbeat.innerText = deviceHeartbeat.innerText +	item + ",";}
+ 
+function showCommand(data){
+	deviceHeartbeat.innerText = "";
+	data.forEach(concatArray);
+    return;
+}
+
+ /* ----- Move Functions -------*/
+
+function unlock() {
+	console.log("cheese please!");
+	const data = new Uint8Array([0x5a,0x5f,0x06,0xdb,0xb9,0x2e,0x28,0x4f,0xa5]); //unlock motion
+	sendCharacteristic.writeValue(data);
+	showCommand(data);	
+}
+
+async function setMove(move) {
+	console.log("move!");
+	let data = new Uint8Array([0x5a,parseInt(move),parseInt(speed.value),0x00,parseInt(move)+parseInt(speed.value),0xa5]); //move
+	await sendCharacteristic.writeValue(data);
+	//showCommand(data);	
+	data = new Uint8Array([0x5a,0,parseInt(speed.value),0x00,parseInt(move)+parseInt(speed.value),0xa5]); //stop
+	await sendCharacteristic.writeValue(data);
+	//showCommand(data);	
+}
+
+</script>
+</body>
+</html>
