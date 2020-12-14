@@ -1,5 +1,5 @@
 # WebBTLE_Mouse_Racer
-Web-based Controller for (https://s.click.aliexpress.com/e/_A90Axx)[Mouse Racer Cat Toy] via Web Bluetooth (LE) API
+Web-based Controller for [Mouse Racer Cat Toy](https://s.click.aliexpress.com/e/_A90Axx) via Web Bluetooth (LE) API
 (Toy made by Hangzhou Tianyuan Pet Products Co., Ltd)
 
 Note: requires Google Chrome, Microsoft Edge, or Opera.
